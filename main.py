@@ -1,10 +1,11 @@
 # read file input
+import sys
 
-with open('instructions.txt', 'r') as instructions:
-  lines = instructions.readlines()
+with open(sys.argv[1], 'r') as instructions:
+  contents = instructions.readlines()
 
 # store plateau coordinate in var
-plateau_size = lines.pop(0).strip().split()
+plateau_size = contents.pop(0).strip().split()
 
 cardinal_degrees = {'N': 0, 'E': 90, 'S': 180, 'W': 270}
 cardinal_degrees_reverse = {v: k for k, v in cardinal_degrees.items()}
@@ -43,17 +44,10 @@ def rover(start, directions):
   print(x, y, h)
 
 # iterate over instructions, pass start and direction to rover
-for i in range(0, len(lines)-1, 2):
-  start = lines[i].strip()
+for i in range(0, len(contents)-1, 2):
+  start = contents[i].strip()
   x, y, h = start.split(' ')
   x = int(x)
   y = int(y)
-  directions = lines[i+1].strip()
+  directions = contents[i+1].strip()
   rover((x, y, h), directions)
-
-
-
-
-
-
-# return final coordinates of all rovers
